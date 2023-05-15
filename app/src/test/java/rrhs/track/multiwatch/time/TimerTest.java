@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Test;
 
 public class TimerTest {
-    Timer timer = new Timer(400);
+    private final Timer timer = new Timer(400);
 
     @After
     public void resetTimer() {
