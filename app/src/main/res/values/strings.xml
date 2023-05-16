@@ -44,4 +44,5 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="add_button_text">Add new stopwatch</string>
+    <string name="back_button_text">Go Back</string>
 </resources>
