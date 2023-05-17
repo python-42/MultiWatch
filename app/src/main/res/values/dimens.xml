@@ -1,3 +1,6 @@
 <resources>
     <dimen name="addBtnMargin">16dp</dimen>
+    <dimen name="timerViewTextScale">32sp</dimen>
+    <dimen name="timerViewButtonHeight">50dp</dimen>
+    <dimen name="timerViewButtonWidth">100dp</dimen>
 </resources>
