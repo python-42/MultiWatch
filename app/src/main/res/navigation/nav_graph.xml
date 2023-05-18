@@ -13,10 +13,10 @@
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/TimerViewFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/TimerViewFragment"
         android:name="rrhs.track.multiwatch.TimerViewFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_timerview">
