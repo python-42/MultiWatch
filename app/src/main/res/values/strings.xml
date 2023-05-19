@@ -48,4 +48,8 @@
     <string name="lap_button_text">Lap</string>
     <string name="start_stop_button_text">Start / Stop timer</string>
     <string name="reset_button_text">Stop and reset timer</string>
+    <string name="two_mile_label">Two Mile</string>
+    <string name="mile_label">Mile</string>
+    <string name="half_mile_label">Half Mile</string>
+    <string name="temporary_text">Replaced</string>
 </resources>
