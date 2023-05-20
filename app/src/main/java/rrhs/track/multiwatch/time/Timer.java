@@ -47,20 +47,23 @@ public class Timer {
     }
 
     public Pace halfMilePace() {
-        return PaceCalculation.getHalfMilePace(lapLengthMeters * lapTimes.size(), getTotalElapsedTimeSeconds());
+        return PaceCalculation.getHalfMilePace(lapLengthMeters * lapTimes.size(), getTimeForLapEstimate());
     }
 
     public Pace milePace() {
-        return PaceCalculation.getMilePace(lapLengthMeters * lapTimes.size(), getTotalElapsedTimeSeconds());
+        return PaceCalculation.getMilePace(lapLengthMeters * lapTimes.size(), getTimeForLapEstimate());
     }
 
     public Pace twoMilePace() {
-        return PaceCalculation.getTwoMilePace(lapLengthMeters * lapTimes.size(), getTotalElapsedTimeSeconds());
+        return PaceCalculation.getTwoMilePace(lapLengthMeters * lapTimes.size(), getTimeForLapEstimate());
     }
     public Pace FiveKilometerPace() {
-        return PaceCalculation.get5kPace(lapLengthMeters * lapTimes.size(), getTotalElapsedTimeSeconds());
+        return PaceCalculation.get5kPace(lapLengthMeters * lapTimes.size(), getTimeForLapEstimate());
     }
 
+    public boolean isTimerRunning() {
+        return timerRunning;
+    }
 
     public Pace[] getLapTimes() {
         Pace[] rtn = lapTimes.toArray(new Pace[0]);
@@ -72,7 +75,26 @@ public class Timer {
         return rtn;
     }
 
+    private double getTimeForLapEstimate() {
+        if(lapTimes.size() == 0) {
+            return 0;
+        }
+
+        return average();
+    }
+
+    private double average() {
+        double rtn = 0;
+        for (Pace i : lapTimes) {
+            rtn += i.getTotalTimeSeconds();
+        }
+        return  rtn / lapTimes.size();
+    }
+
     private int getTotalElapsedTimeSeconds() {
+        if(startTime == null) {
+            return 0;
+        }
         return (int)(elapsedTimeSeconds + (System.currentTimeMillis() - startTime) / 1000.0);
     }
 }
