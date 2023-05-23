@@ -1,173 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_gray"
     android:fillViewport="true"
-    tools:context=".TimerViewFragment">
+    tools:context=".TimerViewFragment"
+    android:padding="16dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/timerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/temporary_text"
+        android:textSize="@dimen/timerViewTextScale"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/timerTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/timerTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/temporary_text"
+        android:textSize="@dimen/timerViewTextScale"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/mileWrapper"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/halfWrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/mileWrapper"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/halfMileLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
+            android:text="@string/half_mile_label"
+            android:textColor="@color/white"
+            android:textSize="@dimen/timerViewPaceTextScale" />
+
+        <TextView
+            android:id="@+id/halfPace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/temporary_text"
+            android:textColor="@color/white"
+            android:textSize="@dimen/timerViewPaceTextScale" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mileWrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/mileLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
+            android:text="@string/mile_label"
+            android:textColor="@color/white"
+            android:textSize="@dimen/timerViewPaceTextScale" />
+
+        <TextView
+            android:id="@+id/milePace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/temporary_text"
+            android:textColor="@color/white"
+            android:textSize="@dimen/timerViewPaceTextScale" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mileWrapper"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/twoMileLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
+            android:text="@string/two_mile_label"
+            android:textColor="@color/white"
+            android:textSize="@dimen/timerViewPaceTextScale" />
+
+        <TextView
+            android:id="@+id/twoPace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/temporary_text"
+            android:textColor="@color/white"
+            android:textSize="@dimen/timerViewPaceTextScale" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/lapButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/button_color"
+        android:contentDescription="@string/lap_button_text"
+        android:minWidth="@dimen/timerViewButtonWidth"
+        android:minHeight="@dimen/timerViewButtonHeight"
+        android:src="@drawable/baseline_360_24"
+        android:background="@drawable/roundcorner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/startStop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/halfWrapper" />
+
+    <ImageButton
+        android:id="@+id/startStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/button_color"
+        android:contentDescription="@string/start_stop_button_text"
+        android:minWidth="@dimen/timerViewButtonWidth"
+        android:minHeight="@dimen/timerViewButtonHeight"
+        android:src="@drawable/baseline_play_circle_outline_24"
+        android:background="@drawable/roundcorner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mileWrapper" />
+
+    <ImageButton
+        android:id="@+id/reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/button_color"
+        android:contentDescription="@string/reset_button_text"
+        android:minWidth="@dimen/timerViewButtonWidth"
+        android:minHeight="@dimen/timerViewButtonHeight"
+        android:src="@drawable/baseline_stop_24"
+        android:background="@drawable/roundcorner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/startStop"
+        app:layout_constraintTop_toBottomOf="@+id/halfWrapper"
+        tools:ignore="ImageContrastCheck" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/timerViewLapContainerMargin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startStop"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintHeight_max="@dimen/timerViewLapContainerMaxHeight">
 
-        <TextView
-            android:id="@+id/timerName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/temporary_text"
-            android:textSize="@dimen/timerViewTextScale"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/timerTime"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/timerTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/temporary_text"
-            android:textSize="@dimen/timerViewTextScale"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/mileWrapper"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/halfWrapper"
-            android:layout_width="wrap_content"
+            android:id="@+id/lapContainer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/mileWrapper"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/halfMileLabel"
-                android:layout_width="wrap_content"
+                android:id="@+id/temp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="3dp"
-                android:text="@string/half_mile_label"
-                android:textColor="@color/white"
-                android:textSize="@dimen/timerViewPaceTextScale" />
-
-            <TextView
-                android:id="@+id/halfPace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:text="@string/temporary_text"
-                android:textColor="@color/white"
-                android:textSize="@dimen/timerViewPaceTextScale" />
+                android:textColor="@color/white" />
         </LinearLayout>
+    </ScrollView>
 
-        <LinearLayout
-            android:id="@+id/mileWrapper"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/mileLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="3dp"
-                android:text="@string/mile_label"
-                android:textColor="@color/white"
-                android:textSize="@dimen/timerViewPaceTextScale" />
-
-            <TextView
-                android:id="@+id/milePace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/temporary_text"
-                android:textColor="@color/white"
-                android:textSize="@dimen/timerViewPaceTextScale" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/mileWrapper"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/twoMileLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="3dp"
-                android:text="@string/two_mile_label"
-                android:textColor="@color/white"
-                android:textSize="@dimen/timerViewPaceTextScale" />
-
-            <TextView
-                android:id="@+id/twoPace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/temporary_text"
-                android:textColor="@color/white"
-                android:textSize="@dimen/timerViewPaceTextScale" />
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/lapButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/button_color"
-            android:contentDescription="@string/lap_button_text"
-            android:minWidth="@dimen/timerViewButtonWidth"
-            android:minHeight="@dimen/timerViewButtonHeight"
-            android:src="@drawable/baseline_360_24"
-            android:background="@drawable/roundcorner"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/startStop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/halfWrapper" />
-
-        <ImageButton
-            android:id="@+id/startStop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/button_color"
-            android:contentDescription="@string/start_stop_button_text"
-            android:minWidth="@dimen/timerViewButtonWidth"
-            android:minHeight="@dimen/timerViewButtonHeight"
-            android:src="@drawable/baseline_play_circle_outline_24"
-            android:background="@drawable/roundcorner"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mileWrapper" />
-
-        <ImageButton
-            android:id="@+id/reset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/button_color"
-            android:contentDescription="@string/reset_button_text"
-            android:minWidth="@dimen/timerViewButtonWidth"
-            android:minHeight="@dimen/timerViewButtonHeight"
-            android:src="@drawable/baseline_stop_24"
-            android:background="@drawable/roundcorner"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/startStop"
-            app:layout_constraintTop_toBottomOf="@+id/halfWrapper"
-            tools:ignore="ImageContrastCheck" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

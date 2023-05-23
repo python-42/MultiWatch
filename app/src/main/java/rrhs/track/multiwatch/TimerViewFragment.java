@@ -1,9 +1,12 @@
 package rrhs.track.multiwatch;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -19,6 +22,7 @@ public class TimerViewFragment extends Fragment {
     private Timer timer;
 
     private boolean timerRunning = false;
+    private int lapNumber = 0;
 
     @Override
     public View onCreateView(
@@ -72,26 +76,60 @@ public class TimerViewFragment extends Fragment {
     }
 
     public void updateData() {
-        binding.timerTime.setText(timer.getElapsedTime().toString());
-        binding.halfPace.setText(timer.halfMilePace().toString());
-        binding.milePace.setText(timer.milePace().toString());
-        binding.twoPace.setText(timer.twoMilePace().toString());
+        if(binding != null) {
+            binding.timerTime.setText(timer.getElapsedTime().toString());
+            binding.halfPace.setText(timer.halfMilePace().toString());
+            binding.milePace.setText(timer.milePace().toString());
+            binding.twoPace.setText(timer.twoMilePace().toString());
 
-        if(timerRunning != timer.isTimerRunning()) {
-            if(timer.isTimerRunning()) {
-                binding.startStop.setImageDrawable(ContextCompat.getDrawable(binding.getRoot().getContext(), R.drawable.baseline_pause_circle_outline_24));
-            }else {
-                binding.startStop.setImageDrawable(ContextCompat.getDrawable(binding.getRoot().getContext(), R.drawable.baseline_play_circle_outline_24));
+            if(lapNumber != timer.getLapCount()) {
+                if(timer.getLapCount() == 0) {
+                    resetLapDisplay();
+                }else {
+                    TextView previousLap = (TextView) binding.lapContainer.getChildAt(lapNumber);
+                    previousLap.setText(getString(R.string.lap_text, Integer.toString(lapNumber + 1), timer.getLapTimes()[lapNumber]));
+                    addLap();
+                }
             }
+
+            TextView child = (TextView) binding.lapContainer.getChildAt(lapNumber);
+            child.setText(getString(R.string.lap_text, Integer.toString(lapNumber + 1), timer.getIncompleteLapTime()));
+
+            if(timerRunning != timer.isTimerRunning()) {
+                if(timer.isTimerRunning()) {
+                    binding.startStop.setImageDrawable(ContextCompat.getDrawable(binding.getRoot().getContext(), R.drawable.baseline_pause_circle_outline_24));
+                }else {
+                    binding.startStop.setImageDrawable(ContextCompat.getDrawable(binding.getRoot().getContext(), R.drawable.baseline_play_circle_outline_24));
+                }
+            }
+
+            lapNumber = timer.getLapCount();
+            timerRunning = timer.isTimerRunning();
         }
-        timerRunning = timer.isTimerRunning();
+    }
+
+    private void addLap() {
+        lapNumber++;
+        TextView child = new TextView(this.getContext());
+
+        child.setGravity(Gravity.CENTER_HORIZONTAL);
+        child.setTextColor(Color.WHITE);
+
+        binding.lapContainer.addView(child);//text is set within update loop
+    }
+
+    private void resetLapDisplay() {
+        binding.lapContainer.removeAllViews();
+        addLap();
+        lapNumber = 0;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         service.stopWorker();
-        //binding = null;
+
+        binding = null;
     }
 
 }

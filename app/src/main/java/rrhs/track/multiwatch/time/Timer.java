@@ -78,13 +78,24 @@ public class Timer {
     public Pace getLastLap() {
         int size = lapTimes.size();
         if(size == 0) {
-            return null;
+            return new Pace(0);
         }
         if(size == 1) {
             return lapTimes.get(0);
         }
 
         return new Pace(lapTimes.get(size - 2).getTotalTimeSeconds() - lapTimes.get(size - 1).getTotalTimeSeconds());
+    }
+
+    public Pace getIncompleteLapTime() {
+        if(lapTimes.size() > 0) {
+            return new Pace(getElapsedTime().getTotalTimeSeconds() - lapTimes.get(lapTimes.size() - 1).getTotalTimeSeconds());
+        }
+        return getElapsedTime();
+    }
+
+    public int getLapCount() {
+        return lapTimes.size();
     }
 
 
