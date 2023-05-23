@@ -91,10 +91,10 @@ public class Timer {
         return  rtn / lapTimes.size();
     }
 
-    private int getTotalElapsedTimeSeconds() {
+    private double getTotalElapsedTimeSeconds() {
         if(startTime == null) {
             return 0;
         }
-        return (int)(elapsedTimeSeconds + (System.currentTimeMillis() - startTime) / 1000.0);
+        return (elapsedTimeSeconds + (System.currentTimeMillis() - startTime) / 1000.0);
     }
 }
