@@ -21,13 +21,12 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
@@ -39,9 +38,12 @@ public class MainActivity extends AppCompatActivity {
         binding.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.addButton)
-                        .setAction("Action", null).show();
+                if(!AppState.getInstance().isCreateFragmentVisible()) {
+                    navController.navigate(R.id.createTimerFragment);
+                    AppState.getInstance().setCreateFragmentVisible(true);
+                }else {
+                    Snackbar.make(view,"Create a timer on this page" , Snackbar.LENGTH_SHORT).setAnchorView(R.id.addButton).show();
+                }
             }
         });
     }
@@ -70,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
+        if(AppState.getInstance().isCreateFragmentVisible()) {
+            AppState.getInstance().setCreateFragmentVisible(false);
+        }
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();

@@ -23,6 +23,7 @@ public class TimerService extends Service {
     public void addTimer(String name) {
         map.put(name, new Timer(lapLength));
     }
+    public void addTimer(String name, int lapDistance) {map.put(name, new Timer(lapDistance));}
 
     public Timer getTimer(String name) {
         return map.get(name);

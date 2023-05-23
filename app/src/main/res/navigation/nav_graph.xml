@@ -31,7 +31,7 @@
     <fragment
         android:id="@+id/createTimerFragment"
         android:name="rrhs.track.multiwatch.CreateTimerFragment"
-        android:label="fragment_createtimer"
+        android:label="@string/createtimer_fragment_label"
         tools:layout="@layout/fragment_createtimer" >
         <action
             android:id="@+id/action_createTimerFragment_to_ListViewFragment"
