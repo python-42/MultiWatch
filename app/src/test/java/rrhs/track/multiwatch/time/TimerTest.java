@@ -66,6 +66,7 @@ public class TimerTest {
 
         Pace[] expectedPaces = {new Pace(2), new Pace(1), new Pace(3)};
         assertArrayEquals(expectedPaces, timer.getLapTimes());
+        assertEquals(new Pace(3), timer.getLastLap());
     }
 
 }

@@ -75,6 +75,19 @@ public class Timer {
         return rtn;
     }
 
+    public Pace getLastLap() {
+        int size = lapTimes.size();
+        if(size == 0) {
+            return null;
+        }
+        if(size == 1) {
+            return lapTimes.get(0);
+        }
+
+        return new Pace(lapTimes.get(size - 2).getTotalTimeSeconds() - lapTimes.get(size - 1).getTotalTimeSeconds());
+    }
+
+
     private double getTimeForLapEstimate() {
         if(lapTimes.size() == 0) {
             return 0;
