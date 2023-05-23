@@ -3,26 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/ListViewFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="rrhs.track.multiwatch.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:id="@+id/ListViewFragment"
+        android:name="rrhs.track.multiwatch.ListViewFragment"
+        android:label="@string/listview_fragment_label"
+        tools:layout="@layout/fragment_listview">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/action_ListViewFragment_to_TimerViewFragment"
             app:destination="@id/TimerViewFragment" />
+        <action
+            android:id="@+id/action_ListViewFragment_to_createTimerFragment"
+            app:destination="@id/createTimerFragment" />
     </fragment>
     <fragment
         android:id="@+id/TimerViewFragment"
         android:name="rrhs.track.multiwatch.TimerViewFragment"
-        android:label="@string/second_fragment_label"
+        android:label="@string/timerview_fragment_label"
         tools:layout="@layout/fragment_timerview">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_TimerViewFragment_to_ListViewFragment"
+            app:destination="@id/ListViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createTimerFragment"
+        android:name="rrhs.track.multiwatch.CreateTimerFragment"
+        android:label="fragment_createtimer"
+        tools:layout="@layout/fragment_createtimer" >
+        <action
+            android:id="@+id/action_createTimerFragment_to_ListViewFragment"
+            app:destination="@id/ListViewFragment" />
     </fragment>
 </navigation>
