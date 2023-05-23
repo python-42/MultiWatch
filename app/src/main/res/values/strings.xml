@@ -4,6 +4,7 @@
     <!-- Strings used for fragments for navigation -->
     <string name="listview_fragment_label">List View</string>
     <string name="timerview_fragment_label">Timer View</string>
+    <string name="createtimer_fragment_label">Create Timer</string>
 
     <string name="add_button_text">Add new stopwatch</string>
 
@@ -24,6 +25,8 @@
 
     <string name="create">Create</string>
     <string name="cancel">Cancel</string>
+    <string name="input_blank_error_message">Input may not be blank</string>
+    <string name="input_bad_number_error_message">Lap distance must be a well formed positive number.</string>
 
     <string name="lap_text">#%1$s : %2$s</string>
 </resources>
