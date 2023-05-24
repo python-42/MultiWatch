@@ -23,6 +23,7 @@ public class TimerViewFragment extends Fragment {
 
     private boolean timerRunning = false;
     private int lapNumber = 0;
+    private long workerID;
 
     @Override
     public View onCreateView(
@@ -79,7 +80,7 @@ public class TimerViewFragment extends Fragment {
             }
         });
 
-        service.startUpdateThread(() -> updateData());
+        workerID = service.startUpdateThread(() -> updateData());
     }
 
     public void updateData() {
@@ -134,7 +135,7 @@ public class TimerViewFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        service.stopWorker();
+        service.stopWorker(workerID);
 
         binding = null;
     }

@@ -33,7 +33,7 @@ public class TimerService extends Service {
         return map.containsKey(name);
     }
 
-    public void startUpdateThread(Runnable run) {
+    public long startUpdateThread(Runnable run) {
         Handler handler = new Handler(Looper.getMainLooper());
 
         Runnable toRun = new Runnable() {
@@ -43,7 +43,7 @@ public class TimerService extends Service {
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException e) {
-                        Log.d("TimerService", "TimerService worker thread interrupted");
+                        Log.d("TimerService", "TimerService worker thread interrupted (worker ID " + worker.getId() + ")");
                         break;
                     }
                     handler.post(run);
@@ -52,10 +52,14 @@ public class TimerService extends Service {
         };
         worker = new Thread(toRun);
         worker.start();
+        return worker.getId();
     }
 
-    public void stopWorker() {
-        if(worker != null && worker.isAlive()) {
+    public void stopWorker(long id) {
+        /* This is OK because if the worker ID does not match it means that the worker thread was overwritten by a new thread.
+        * This new ID has been stored in the new fragment instance and the associated worker will be overwritten or stopped.
+        * */
+        if(worker != null && worker.isAlive() && worker.getId() == id) {
             worker.interrupt();
         }
     }
