@@ -34,7 +34,7 @@ public class TimerViewFragment extends Fragment {
         binding = FragmentTimerviewBinding.inflate(inflater, container, false);
 
         service = AppState.getInstance().getTimerService();
-        String timerName = AppState.getInstance().getDesiredTimerName();
+        String timerName = AppState.getInstance().getInViewTimerName();
 
         if(timerName == null) {
             timer = new Timer(400);

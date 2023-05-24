@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(id == R.id.action_anon_timer) {
-            AppState.getInstance().setDesiredTimerName(null);
+            AppState.getInstance().setInViewTimerName(null);
             Navigation.findNavController(this, R.id.nav_host_fragment_content_main).navigate(R.id.TimerViewFragment);
             return true;//do not want this item to be consumed further as the only desired impact is happening now
         }

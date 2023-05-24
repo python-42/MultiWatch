@@ -2,7 +2,8 @@ package rrhs.track.multiwatch;
 
 public class AppState {
     private final TimerService timerService;
-    private String desiredTimerName;
+    private String inViewTimerName;
+    private String operationTimerName;
     private boolean createFragmentVisible = false;
     private static AppState instance;
 
@@ -22,10 +23,15 @@ public class AppState {
         return timerService;
     }
 
-    public void setDesiredTimerName(String desiredTimerName) {
-        this.desiredTimerName = desiredTimerName;
+    public void setInViewTimerName(String inViewTimerName) {
+        this.inViewTimerName = inViewTimerName;
     }
-    public String getDesiredTimerName() {return desiredTimerName;}
+    public String getInViewTimerName() {return inViewTimerName;}
+
+    public void setOperationTimerName(String operationTimerName) {
+        this.operationTimerName = operationTimerName;
+    }
+    public String getOperationTimerName() {return operationTimerName;}
 
     public boolean isCreateFragmentVisible() {return createFragmentVisible;}
     public void setCreateFragmentVisible(boolean b) {
