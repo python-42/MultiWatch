@@ -27,18 +27,25 @@ public class TimerViewFragment extends Fragment {
     @Override
     public View onCreateView(
 
-            LayoutInflater inflater, ViewGroup container,
+            @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
         binding = FragmentTimerviewBinding.inflate(inflater, container, false);
 
         service = AppState.getInstance().getTimerService();
         String timerName = AppState.getInstance().getDesiredTimerName();
-        if(!service.timerExists(timerName)) {
-            service.addTimer(timerName);
+
+        if(timerName == null) {
+            timer = new Timer(400);
+            binding.timerName.setText(R.string.anonymous_timer);
+        }else {
+            if(!service.timerExists(timerName)) {
+                service.addTimer(timerName);
+            }
+            timer = service.getTimer(timerName);
+            binding.timerName.setText(timerName);
         }
-        timer = service.getTimer(timerName);
-        binding.timerName.setText(timerName);
+        binding.lapLength.setText(getString(R.string.lap_length_text, Integer.toString(timer.getLapLengthMeters())));
 
         return binding.getRoot();
 

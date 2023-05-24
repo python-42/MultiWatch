@@ -29,4 +29,7 @@
     <string name="input_bad_number_error_message">Lap distance must be a well formed positive number.</string>
 
     <string name="lap_text">#%1$s : %2$s</string>
+    <string name="lap_length_text">Lap: %1$s meters</string>
+    <string name="anonymous_timer">Anonymous Timer</string>
+
 </resources>

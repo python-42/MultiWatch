@@ -98,6 +98,8 @@ public class Timer {
         return lapTimes.size();
     }
 
+    public int getLapLengthMeters() {return lapLengthMeters;}
+
 
     private double getTimeForLapEstimate() {
         if(lapTimes.size() == 0) {

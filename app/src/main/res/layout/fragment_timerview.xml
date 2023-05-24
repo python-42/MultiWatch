@@ -27,12 +27,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/temporary_text"
-        android:textSize="@dimen/timerViewTextScale"
         android:textColor="@color/white"
+        android:textSize="@dimen/timerViewTextScale"
         app:layout_constraintBottom_toTopOf="@+id/mileWrapper"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lapLength"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/temporary_text"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/timerTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timerName" />
 
     <LinearLayout
         android:id="@+id/halfWrapper"
