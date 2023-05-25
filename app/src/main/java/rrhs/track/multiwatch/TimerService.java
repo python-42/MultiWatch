@@ -14,7 +14,7 @@ import rrhs.track.multiwatch.time.Timer;
 public class TimerService extends Service {
     private final HashMap<String, Timer> map = new HashMap<String, Timer>();
     private final int lapLength;
-    private Thread worker;
+    private final HashMap<Long, Thread> workers = new HashMap<Long, Thread>();
 
     public TimerService(int lapLengthMeters) {
         lapLength = lapLengthMeters;
@@ -32,6 +32,7 @@ public class TimerService extends Service {
     public boolean timerExists(String name) {
         return map.containsKey(name);
     }
+    public int getTimerCount() {return map.size();}
 
     public long startUpdateThread(Runnable run) {
         Handler handler = new Handler(Looper.getMainLooper());
@@ -43,15 +44,16 @@ public class TimerService extends Service {
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException e) {
-                        Log.d("TimerService", "TimerService worker thread interrupted (worker ID " + worker.getId() + ")");
+                        Log.d("TimerService", "TimerService worker thread interrupted");
                         break;
                     }
                     handler.post(run);
                 }
             }
         };
-        worker = new Thread(toRun);
+        Thread worker = new Thread(toRun);
         worker.start();
+        workers.put(worker.getId(), worker);
         return worker.getId();
     }
 
@@ -59,9 +61,15 @@ public class TimerService extends Service {
         /* This is OK because if the worker ID does not match it means that the worker thread was overwritten by a new thread.
         * This new ID has been stored in the new fragment instance and the associated worker will be overwritten or stopped.
         * */
-        if(worker != null && worker.isAlive() && worker.getId() == id) {
+        Thread worker = workers.get(id);
+        if(worker != null && worker.isAlive()) {
+            Log.d("TimerService" , "TimerService worker ID " + worker.getId() + " interrupt called...");
             worker.interrupt();
+            workers.remove(id);//remove after it is interrupted
+        }else {
+            workers.remove(id);//only gets here if the worker is null or dead already
         }
+
     }
 
     @Override
