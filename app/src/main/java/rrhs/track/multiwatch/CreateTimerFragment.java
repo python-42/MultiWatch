@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,6 @@ public class CreateTimerFragment extends Fragment {
         binding.cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("", "cancel button clicked");
                 binding.timerNameInput.setText("");
                 binding.lapDistanceInput.setText(R.string.lap_distance_default_value);
                 AppState.getInstance().setCreateFragmentVisible(false);
@@ -42,7 +40,6 @@ public class CreateTimerFragment extends Fragment {
         binding.createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("", "create button clicked");
                 String name = binding.timerNameInput.getText().toString();
                 String lapDistance = binding.lapDistanceInput.getText().toString();
 
@@ -63,6 +60,7 @@ public class CreateTimerFragment extends Fragment {
                 }
 
                 AppState.getInstance().getTimerService().addTimer(name, distance);
+                AppState.getInstance().setOperationTimerName(name);
                 AppState.getInstance().setCreateFragmentVisible(false);
                 NavHostFragment.findNavController(CreateTimerFragment.this).navigate(R.id.action_createTimerFragment_to_ListViewFragment);
             }
@@ -73,9 +71,5 @@ public class CreateTimerFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
-
-    public boolean needsRelaunch() {
-        return binding == null;
     }
 }
