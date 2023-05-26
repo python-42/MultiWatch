@@ -15,5 +15,9 @@
     <dimen name="timerCreationLabelScale">18sp</dimen>
     <dimen name="timerCreationMargin">40dp</dimen>
 
+    <dimen name="timer_view_component_button_height">37.5dp</dimen>
+    <dimen name="timer_view_component_button_width">75dp</dimen>
+    <dimen name="timer_view_component_margin">10dp</dimen>
+
 
 </resources>
