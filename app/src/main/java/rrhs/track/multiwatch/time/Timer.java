@@ -106,15 +106,11 @@ public class Timer {
             return 0;
         }
 
-        return average();
-    }
-
-    private double average() {
         double rtn = 0;
-        for (Pace i : lapTimes) {
+        for (Pace i : getLapTimes()) {
             rtn += i.getTotalTimeSeconds();
         }
-        return  rtn / lapTimes.size();
+        return rtn;
     }
 
     private double getTotalElapsedTimeSeconds() {

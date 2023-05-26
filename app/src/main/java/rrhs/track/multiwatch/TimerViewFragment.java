@@ -36,17 +36,17 @@ public class TimerViewFragment extends Fragment {
         service = AppState.getInstance().getTimerService();
         String timerName = AppState.getInstance().getInViewTimerName();
 
+        if(!service.timerExists(timerName)) {
+            service.addTimer(timerName);
+        }
+        timer = service.getTimer(timerName);
+        binding.lapLength.setText(getString(R.string.lap_length_text, Integer.toString(timer.getLapLengthMeters())));
+
         if(timerName == null) {
-            timer = new Timer(400);
             binding.timerName.setText(R.string.anonymous_timer);
         }else {
-            if(!service.timerExists(timerName)) {
-                service.addTimer(timerName);
-            }
-            timer = service.getTimer(timerName);
             binding.timerName.setText(timerName);
         }
-        binding.lapLength.setText(getString(R.string.lap_length_text, Integer.toString(timer.getLapLengthMeters())));
 
         return binding.getRoot();
 
